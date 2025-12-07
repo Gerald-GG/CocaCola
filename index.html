@@ -8,20 +8,29 @@
 </head>
 <body>
     <div class="login-container">
-        <h2>Welcome Back</h2>
-        <form id="loginForm">
-            <div class="input-group">
-                <label for="identifier">Username or Email</label>
-                <input type="text" id="identifier" placeholder="Enter username or email" required />
-            </div>
+        <!-- Left Panel for Branding -->
+        <div class="left-panel">
+            <h1>Welcome</h1>
+        </div>
+        
+        <!-- Right Panel for Login Form -->
+        <div class="right-panel">
+            <h2>Welcome Back</h2>
+            <form id="loginForm">
+                <div class="input-group">
+                    <label for="identifier">Username or Email</label>
+                    <input type="text" id="identifier" placeholder="Enter username or email" required />
+                </div>
 
-            <div class="input-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" placeholder="Enter password" required />
-            </div>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="Enter password" required />
+                </div>
 
-            <button type="submit" class="btn-login">Login</button>
-        </form>
+                <button type="submit" class="btn-login">Login</button>
+            </form>
+            <p class="switch-link">Don't have an account? <a href="register.html">Register here</a></p>
+        </div>
     </div>
 
     <script src="script.js"></script>
