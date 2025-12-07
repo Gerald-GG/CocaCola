@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="style.css" />  <!-- Reuses your existing style.css -->
+</head>
+<body>
+    <div class="dashboard-container">
+        <header class="dashboard-header">
+            <h1>Dashboard</h1>
+            <button class="btn-logout" onclick="logout()">Logout</button>
+        </header>
+        
+        <div class="dashboard-content">
+            <div class="welcome-section">
+                <h2>Welcome Back, User!</h2>
+                <p>You've successfully logged in. Here's your overview.</p>
+            </div>
+            
+            <div class="stats-section">
+                <div class="stat-card">
+                    <h3>Total Orders</h3>
+                    <p>42</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Active Sessions</h3>
+                    <p>1</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Notifications</h3>
+                    <p>3</p>
+                </div>
+            </div>
+            
+            <div class="actions-section">
+                <button class="btn-action">View Profile</button>
+                <button class="btn-action">Settings</button>
+                <button class="btn-action">Reports</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>  <!-- Reuses script.js for logout -->
+</body>
+</html>

@@ -131,3 +131,177 @@ body {
     75% { transform: translateX(-5px); }
     100% { transform: translateX(0); }
 }
+
+/* Dashboard Styles (with responsive logout button) */
+.dashboard-container {
+    width: 100%;
+    min-height: 100vh;
+    background: #020611;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.dashboard-header {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding: 20px;
+    background: rgba(0, 0, 50, 0.8);
+    border-radius: 10px;
+    border: 1px solid rgba(0, 255, 255, 0.3);
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+}
+
+.dashboard-header h1 {
+    font-size: 32px;
+    color: #00eaff;
+    margin: 0;
+}
+
+.btn-logout {
+    padding: 10px 20px;
+    background: linear-gradient(to right, #ff6b6b, #ff4757);
+    border: none;
+    border-radius: 20px;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(255, 107, 107, 0.5);
+    transition: 0.3s ease;
+}
+
+.btn-logout:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(255, 107, 107, 0.8);
+}
+
+.btn-logout:active {
+    transform: scale(0.95);  /* Makes it feel "active" on click */
+}
+
+/* Responsive Adjustments for Dashboard Header */
+@media (max-width: 768px) {
+    .dashboard-header {
+        flex-direction: column;  /* Stack title and button vertically on mobile */
+        text-align: center;
+        padding: 15px;
+    }
+
+    .dashboard-header h1 {
+        font-size: 28px;
+        margin-bottom: 15px;  /* Space below title */
+    }
+
+    .btn-logout {
+        font-size: 14px;
+        padding: 8px 16px;  /* Smaller button on mobile */
+        width: 100%;  /* Full-width for easier tapping */
+        max-width: 200px;  /* Prevent it from being too wide */
+    }
+}
+
+@media (max-width: 480px) {
+    .dashboard-header h1 {
+        font-size: 24px;
+    }
+
+    .btn-logout {
+        font-size: 12px;
+        padding: 6px 12px;
+    }
+}
+
+.dashboard-content {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.welcome-section {
+    text-align: center;
+    padding: 20px;
+    background: rgba(0, 0, 50, 0.8);
+    border-radius: 10px;
+    border: 1px solid rgba(0, 255, 255, 0.3);
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+}
+
+.welcome-section h2 {
+    font-size: 28px;
+    color: #00eaff;
+    margin-bottom: 10px;
+}
+
+.welcome-section p {
+    color: #b8eaff;
+    font-size: 16px;
+}
+
+.stats-section {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.stat-card {
+    flex: 1;
+    min-width: 200px;
+    padding: 20px;
+    background: rgba(0, 0, 50, 0.8);
+    border-radius: 10px;
+    border: 1px solid rgba(0, 255, 255, 0.3);
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+    text-align: center;
+    transition: 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.4);
+}
+
+.stat-card h3 {
+    font-size: 18px;
+    color: #00eaff;
+    margin-bottom: 10px;
+}
+
+.stat-card p {
+    font-size: 24px;
+    color: #fff;
+    font-weight: bold;
+}
+
+.actions-section {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.btn-action {
+    padding: 12px 24px;
+    background: linear-gradient(to right, #00eaff, #0088ff);
+    border: none;
+    border-radius: 25px;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 0 15px rgba(0, 200, 255, 0.5);
+    transition: 0.3s ease;
+}
+
+.btn-action:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px rgba(0, 200, 255, 0.9);
+}
