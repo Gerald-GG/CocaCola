@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
             window.location.href = 'dashboard.html';
             return;
         }
-    }
+    } 
     
     // Handle Login Page
     if (currentPage === 'index.html' || currentPage === '') {
