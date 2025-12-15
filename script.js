@@ -1,75 +1,71 @@
-// script.js
-
 document.addEventListener("DOMContentLoaded", () => {
 
+    const levelMap = {
+        level1: "Foundations",
+        level2: "Intermediate",
+        level3: "Advanced",
+        level4: "Expert"
+    };
+
+    const completedDisplay = document.getElementById("completedCount");
+    const skillDisplay = document.querySelector(".stat-card:nth-child(3) p");
+    const currentLevelDisplay = document.querySelector(".stat-card:nth-child(2) p");
+
     /* =========================
-       LOGIN FORM VALIDATION
-    ========================== */
-    const loginForm = document.getElementById("loginForm");
-
-    if (loginForm) {
-        loginForm.addEventListener("submit", (e) => {
-            e.preventDefault();
-
-            const identifier = document.getElementById("identifier").value.trim();
-            const password = document.getElementById("password").value.trim();
-
-            if (identifier === "" || password === "") {
-                alert("Please enter your username/email and password.");
-                return;
-            }
-
-            // Simulated authentication (replace with backend later)
-            alert("Login successful!");
-            window.location.href = "dashboard.html";
+       TOGGLE PROJECT VISIBILITY
+    ========================= */
+    window.toggleProjects = (levelId) => {
+        document.querySelectorAll(".projects-list").forEach(list => {
+            if (list.id !== levelId) list.style.display = "none";
         });
+
+        const target = document.getElementById(levelId);
+        target.style.display = target.style.display === "block" ? "none" : "block";
+
+        currentLevelDisplay.textContent = levelMap[levelId];
+    };
+
+    /* =========================
+       UPDATE PROGRESS
+    ========================= */
+    function updateProgress() {
+        let totalCompleted = 0;
+
+        document.querySelectorAll(".level-card").forEach(card => {
+            const checkboxes = card.querySelectorAll("input[type='checkbox']");
+            const progressBar = card.querySelector(".progress");
+            const progressText = card.querySelector("p");
+
+            if (!checkboxes.length) return;
+
+            const completed = [...checkboxes].filter(cb => cb.checked).length;
+            const total = checkboxes.length;
+            const percent = Math.round((completed / total) * 100);
+
+            progressBar.style.width = percent + "%";
+            progressText.textContent = `Progress: ${completed} / ${total} projects`;
+
+            totalCompleted += completed;
+        });
+
+        completedDisplay.textContent = `${totalCompleted} projects completed`;
+        skillDisplay.textContent = totalCompleted;
     }
 
     /* =========================
-       REGISTRATION FORM
-    ========================== */
-    const registerForm = document.getElementById("registerForm");
+       EVENT LISTENERS
+    ========================= */
+    document.querySelectorAll("input[type='checkbox']").forEach(cb => {
+        cb.addEventListener("change", updateProgress);
+    });
 
-    if (registerForm) {
-        registerForm.addEventListener("submit", (e) => {
-            e.preventDefault();
+    /* =========================
+       LOGOUT
+    ========================= */
+    window.logout = () => {
+        alert("Logged out successfully");
+        window.location.href = "index.html";
+    };
 
-            const fullName = document.getElementById("fullName").value.trim();
-            const email = document.getElementById("regEmail").value.trim();
-            const password = document.getElementById("regPassword").value.trim();
-            const confirmPassword = document.getElementById("confirmPassword").value.trim();
-
-            if (!fullName || !email || !password || !confirmPassword) {
-                alert("All fields are required.");
-                return;
-            }
-
-            if (password !== confirmPassword) {
-                alert("Passwords do not match.");
-                return;
-            }
-
-            alert("Registration successful! You can now log in.");
-            window.location.href = "index.html";
-        });
-    }
+    updateProgress();
 });
-
-/* =========================
-   DASHBOARD FUNCTIONS
-========================= */
-
-// Toggle roadmap project lists
-function toggleProjects(levelId) {
-    const section = document.getElementById(levelId);
-    if (section) {
-        section.style.display =
-            section.style.display === "block" ? "none" : "block";
-    }
-}
-
-// Logout function
-function logout() {
-    alert("You have been logged out.");
-    window.location.href = "index.html";
-}
