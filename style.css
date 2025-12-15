@@ -1,48 +1,98 @@
-/* Neon Modern Login Page - External CSS Only */
+/* ============================
+   GLOBAL RESET & BASE
+============================ */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
 body {
     font-family: Arial, sans-serif;
     background: #020611;
-    height: 100vh;
-    margin: 0;
+    min-height: 100vh;
+    color: #ffffff;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #fff;
 }
 
+/* ============================
+   LOGIN / REGISTER CONTAINER
+============================ */
 .login-container {
-    width: 400px; /* Adjusted for a single-panel login form */
-    padding: 40px;
-    border-radius: 15px;
+    width: 900px;
+    height: 480px;
+    display: flex;
+    border-radius: 16px;
     overflow: hidden;
-    background: linear-gradient(135deg, rgba(0, 255, 255, 0.15), rgba(0, 0, 50, 0.95));
+    background: linear-gradient(
+        135deg,
+        rgba(0, 255, 255, 0.15),
+        rgba(0, 0, 50, 0.95)
+    );
     border: 2px solid rgba(0, 255, 255, 0.35);
-    box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
-    position: relative;
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.35);
+}
+
+/* ============================
+   REGISTER PAGE LAYOUT SWAP
+============================ */
+.register-layout {
+    flex-direction: row-reverse;
+}
+
+/* ============================
+   LEFT PANEL (BRANDING)
+============================ */
+.left-panel {
+    width: 40%;
+    background: rgba(0, 0, 0, 0.35);
+    border-right: 2px solid rgba(0, 255, 255, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.register-layout .left-panel {
+    border-right: none;
+    border-left: 2px solid rgba(0, 255, 255, 0.25);
+    background: rgba(0, 0, 0, 0.45);
+}
+
+.left-panel h1 {
+    font-size: 42px;
+    color: #00eaff;
+    letter-spacing: 2px;
+    text-align: center;
+}
+
+/* ============================
+   RIGHT PANEL (FORMS)
+============================ */
+.right-panel {
+    width: 60%;
+    padding: 45px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
 }
 
-.login-container h2 {
-    margin-bottom: 25px;
+.right-panel h2 {
     font-size: 30px;
-    color: #00eaff;
-    text-align: center;
-    letter-spacing: 2px;
+    margin-bottom: 25px;
 }
 
-/* Inputs */
+/* ============================
+   FORM INPUTS
+============================ */
 .input-group {
-    margin-bottom: 15px;
-    width: 100%;
+    margin-bottom: 16px;
 }
 
 .input-group label {
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: 6px;
     color: #b8eaff;
     font-size: 14px;
 }
@@ -53,255 +103,198 @@ body {
     border-radius: 6px;
     border: 1px solid #00eaff;
     background: rgba(255, 255, 255, 0.08);
-    color: #fff;
+    color: #ffffff;
     font-size: 16px;
     outline: none;
     transition: 0.3s ease;
 }
 
+.input-group input::placeholder {
+    color: #9fddea;
+}
+
 .input-group input:focus {
     border-color: #00aaff;
-    box-shadow: 0 0 10px rgba(0, 200, 255, 0.6);
+    box-shadow: 0 0 12px rgba(0, 200, 255, 0.6);
 }
 
-.input-group input::placeholder {
-    color: #b8eaff;
-}
-
-/* Button */
-.btn-login {
-    width: 100%;
+/* ============================
+   BUTTONS
+============================ */
+.btn-login,
+.btn-action,
+.btn-logout {
     padding: 12px;
-    margin-top: 10px;
-    background: linear-gradient(to right, #00eaff, #0088ff);
-    border: none;
     border-radius: 25px;
-    color: #fff;
-    font-size: 18px;
+    border: none;
+    font-size: 16px;
     cursor: pointer;
+    background: linear-gradient(to right, #00eaff, #0088ff);
+    color: #ffffff;
     box-shadow: 0 0 15px rgba(0, 200, 255, 0.5);
     transition: 0.3s ease;
 }
 
-.btn-login:hover {
-    transform: scale(1.03);
+.btn-login {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.btn-login:hover,
+.btn-action:hover,
+.btn-logout:hover {
+    transform: scale(1.05);
     box-shadow: 0 0 25px rgba(0, 200, 255, 0.9);
 }
 
-/* Message Box (JS feedback) - Updated to match script's "message-box" class */
-.message-box {
-    position: absolute;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 12px 20px;
-    border-radius: 8px;
-    font-weight: bold;
-    backdrop-filter: blur(8px);
-    background: rgba(0, 0, 0, 0.4);
-    border: 1px solid rgba(0, 255, 255, 0.3);
-    box-shadow: 0 0 12px rgba(0, 255, 255, 0.5);
-    display: none;
-    opacity: 0;
-    transition: opacity 0.3s ease;
+/* ============================
+   SWITCH LINKS
+============================ */
+.switch-link {
+    margin-top: 14px;
+    text-align: center;
+    color: #b7eaff;
+    font-size: 14px;
 }
 
-.message-box.show {
-    display: block;
-    opacity: 1;
-}
-
-.message-box.error {
-    color: #ff6b6b;
-}
-
-.message-box.success {
+.switch-link a {
     color: #00eaff;
+    text-decoration: none;
 }
 
-/* Shake Animation (if needed for future enhancements) */
-.shake {
-    animation: shake 0.4s ease;
+.switch-link a:hover {
+    text-decoration: underline;
 }
 
-@keyframes shake {
-    0% { transform: translateX(0); }
-    25% { transform: translateX(-5px); }
-    50% { transform: translateX(5px); }
-    75% { transform: translateX(-5px); }
-    100% { transform: translateX(0); }
-}
-
-/* Dashboard Styles (with responsive logout button) */
+/* ============================
+   DASHBOARD LAYOUT
+============================ */
 .dashboard-container {
     width: 100%;
     min-height: 100vh;
-    background: #020611;
-    color: #fff;
-    font-family: Arial, sans-serif;
+    padding: 25px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    padding: 20px;
 }
 
 .dashboard-header {
-    width: 100%;
-    max-width: 1200px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 30px;
-    padding: 20px;
-    background: rgba(0, 0, 50, 0.8);
-    border-radius: 10px;
-    border: 1px solid rgba(0, 255, 255, 0.3);
-    box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+    margin-bottom: 25px;
 }
 
 .dashboard-header h1 {
-    font-size: 32px;
     color: #00eaff;
-    margin: 0;
 }
 
-.btn-logout {
-    padding: 10px 20px;
-    background: linear-gradient(to right, #ff6b6b, #ff4757);
-    border: none;
-    border-radius: 20px;
-    color: #fff;
-    font-size: 16px;
-    cursor: pointer;
-    box-shadow: 0 0 10px rgba(255, 107, 107, 0.5);
-    transition: 0.3s ease;
-}
-
-.btn-logout:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 20px rgba(255, 107, 107, 0.8);
-}
-
-.btn-logout:active {
-    transform: scale(0.95);  /* Makes it feel "active" on click */
-}
-
-/* Responsive Adjustments for Dashboard Header */
-@media (max-width: 768px) {
-    .dashboard-header {
-        flex-direction: column;  /* Stack title and button vertically on mobile */
-        text-align: center;
-        padding: 15px;
-    }
-
-    .dashboard-header h1 {
-        font-size: 28px;
-        margin-bottom: 15px;  /* Space below title */
-    }
-
-    .btn-logout {
-        font-size: 14px;
-        padding: 8px 16px;  /* Smaller button on mobile */
-        width: 100%;  /* Full-width for easier tapping */
-        max-width: 200px;  /* Prevent it from being too wide */
-    }
-}
-
-@media (max-width: 480px) {
-    .dashboard-header h1 {
-        font-size: 24px;
-    }
-
-    .btn-logout {
-        font-size: 12px;
-        padding: 6px 12px;
-    }
-}
-
+/* ============================
+   DASHBOARD CONTENT
+============================ */
 .dashboard-content {
-    width: 100%;
     max-width: 1200px;
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
+    margin: auto;
+    width: 100%;
 }
 
 .welcome-section {
-    text-align: center;
-    padding: 20px;
-    background: rgba(0, 0, 50, 0.8);
-    border-radius: 10px;
-    border: 1px solid rgba(0, 255, 255, 0.3);
-    box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
-}
-
-.welcome-section h2 {
-    font-size: 28px;
-    color: #00eaff;
-    margin-bottom: 10px;
+    margin-bottom: 25px;
 }
 
 .welcome-section p {
     color: #b8eaff;
-    font-size: 16px;
 }
 
+/* ============================
+   STATS SECTION
+============================ */
 .stats-section {
-    display: flex;
-    justify-content: space-around;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 20px;
-    flex-wrap: wrap;
+    margin-bottom: 30px;
 }
 
 .stat-card {
-    flex: 1;
-    min-width: 200px;
-    padding: 20px;
-    background: rgba(0, 0, 50, 0.8);
-    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.45);
     border: 1px solid rgba(0, 255, 255, 0.3);
-    box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+    border-radius: 14px;
+    padding: 20px;
     text-align: center;
-    transition: 0.3s ease;
-}
-
-.stat-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 0 30px rgba(0, 255, 255, 0.4);
+    box-shadow: 0 0 18px rgba(0, 255, 255, 0.25);
 }
 
 .stat-card h3 {
-    font-size: 18px;
     color: #00eaff;
     margin-bottom: 10px;
 }
 
-.stat-card p {
-    font-size: 24px;
-    color: #fff;
-    font-weight: bold;
+/* ============================
+   ROADMAP SECTION
+============================ */
+.roadmap-section h2 {
+    margin-bottom: 10px;
 }
 
-.actions-section {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    flex-wrap: wrap;
-}
-
-.btn-action {
-    padding: 12px 24px;
-    background: linear-gradient(to right, #00eaff, #0088ff);
-    border: none;
-    border-radius: 25px;
-    color: #fff;
-    font-size: 16px;
+.level-card {
+    background: rgba(0, 0, 0, 0.55);
+    border: 1px solid rgba(0, 255, 255, 0.35);
+    border-radius: 14px;
+    padding: 20px;
+    margin-top: 15px;
     cursor: pointer;
-    box-shadow: 0 0 15px rgba(0, 200, 255, 0.5);
     transition: 0.3s ease;
 }
 
-.btn-action:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 25px rgba(0, 200, 255, 0.9);
+.level-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 22px rgba(0, 255, 255, 0.6);
+}
+
+.projects-list {
+    display: none;
+    margin-top: 15px;
+}
+
+.projects-list ul {
+    padding-left: 20px;
+}
+
+.projects-list li {
+    margin-bottom: 6px;
+    color: #c7f4ff;
+}
+
+/* ============================
+   DASHBOARD ACTIONS
+============================ */
+.actions-section {
+    margin-top: 35px;
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* ============================
+   RESPONSIVE
+============================ */
+@media (max-width: 900px) {
+    .login-container {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .register-layout {
+        flex-direction: column;
+    }
+
+    .left-panel,
+    .right-panel {
+        width: 100%;
+    }
+
+    .left-panel {
+        height: 140px;
+    }
 }
