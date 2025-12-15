@@ -1,5 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
 
+    const STORAGE_KEY = "cyber_dashboard_progress";
+
     const levelMap = {
         level1: "Foundations",
         level2: "Intermediate",
@@ -12,18 +14,35 @@ document.addEventListener("DOMContentLoaded", () => {
     const currentLevelDisplay = document.querySelector(".stat-card:nth-child(2) p");
 
     /* =========================
-       TOGGLE PROJECT VISIBILITY
+       LOAD SAVED DATA
+    ========================= */
+    const savedData = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {
+        checked: {},
+        currentLevel: null
+    };
+
+    /* =========================
+       TOGGLE PROJECTS
     ========================= */
     window.toggleProjects = (levelId) => {
         document.querySelectorAll(".projects-list").forEach(list => {
-            if (list.id !== levelId) list.style.display = "none";
+            list.style.display = "none";
         });
 
         const target = document.getElementById(levelId);
-        target.style.display = target.style.display === "block" ? "none" : "block";
+        target.style.display = "block";
 
         currentLevelDisplay.textContent = levelMap[levelId];
+        savedData.currentLevel = levelId;
+        saveData();
     };
+
+    /* =========================
+       SAVE DATA
+    ========================= */
+    function saveData() {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(savedData));
+    }
 
     /* =========================
        UPDATE PROGRESS
@@ -53,17 +72,34 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     /* =========================
-       EVENT LISTENERS
+       RESTORE CHECKBOX STATE
     ========================= */
     document.querySelectorAll("input[type='checkbox']").forEach(cb => {
-        cb.addEventListener("change", updateProgress);
+        const id = cb.parentElement.textContent.trim();
+
+        if (savedData.checked[id]) {
+            cb.checked = true;
+        }
+
+        cb.addEventListener("change", () => {
+            savedData.checked[id] = cb.checked;
+            saveData();
+            updateProgress();
+        });
     });
+
+    /* =========================
+       RESTORE CURRENT LEVEL
+    ========================= */
+    if (savedData.currentLevel) {
+        toggleProjects(savedData.currentLevel);
+    }
 
     /* =========================
        LOGOUT
     ========================= */
     window.logout = () => {
-        alert("Logged out successfully");
+        localStorage.removeItem(STORAGE_KEY);
         window.location.href = "index.html";
     };
 
